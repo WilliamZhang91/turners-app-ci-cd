@@ -16,4 +16,6 @@ app.get('/products', mongoPractice.getProducts);
 
 app.post('/contacts', mongoPractice.createContact);
 
-app.listen(4000);
+app.listen(port, () => {
+    console.log(`server started`)
+});
