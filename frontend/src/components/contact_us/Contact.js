@@ -8,6 +8,8 @@ const Contact = () => {
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
 
+    console.log(process.env)
+
     const getName = (e) => {
         setName(e.target.value);
         console.log(e.target.value);
@@ -25,7 +27,7 @@ const Contact = () => {
 
     const submitContact = (e) => {
         e.preventDefault();
-        Axios.post("http://localhost:4000/contacts", {
+        Axios.post(`${process.env.REACT_APP_CONTACTS}`, {
             name: name,
             email: email,
             message: message
@@ -35,13 +37,10 @@ const Contact = () => {
 
     return <div className={styles.layout}>
         <div className={styles.inner_layout}>
-
             <div>
                 <h1>Contact Us</h1>
             </div>
-
             <form onSubmit={submitContact}>
-
                 <div>
                     <input
                         className={styles.details}
@@ -52,7 +51,6 @@ const Contact = () => {
                         required
                     />
                 </div>
-
                 <div>
                     <input
                         className={styles.details}
@@ -63,7 +61,6 @@ const Contact = () => {
                         required
                         />
                 </div>
-
                 <div>
                     <textarea
                         className={styles.message}
@@ -75,18 +72,11 @@ const Contact = () => {
                         required
                     />
                 </div>
-
                 <div>
                     <button className={styles.button} type="submit">SUBMIT</button>
                 </div>
-
             </form>
-
-
-
         </div>
-
-
     </div>
 }
 

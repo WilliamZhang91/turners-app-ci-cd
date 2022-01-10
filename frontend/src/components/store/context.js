@@ -20,7 +20,9 @@ const AppContext = React.createContext()
 const AppProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(reducer, initialState)
+    const { REACT_APP_PRODUCT } = process.env
     console.log(state)
+    console.log(REACT_APP_PRODUCT)
 
     const handleRegistration = (e) => {
         dispatch({
@@ -59,21 +61,21 @@ const AppProvider = ({ children }) => {
 
     const handleAddress = (e) => {
         dispatch({
-            type: "ADDRESS", 
+            type: "ADDRESS",
             value: e.target.value
         })
     };
-    
+
     const handlePhone = (e) => {
         dispatch({
-            type: "PHONE", 
+            type: "PHONE",
             value: e.target.value
         })
     };
 
     const handleEmail = (e) => {
         dispatch({
-            type: "EMAIL", 
+            type: "EMAIL",
             value: e.target.value
         })
     };
@@ -87,7 +89,7 @@ const AppProvider = ({ children }) => {
 
     const submitDetails = (e) => {
         e.preventDefault();
-        Axios.post("http://localhost:4000/products", {
+        Axios.post(`${process.env.REACT_APP_PRODUCTS}`, {
             name: state.first_name,
             surname: state.surname,
             registration: state.registration,
@@ -97,8 +99,6 @@ const AppProvider = ({ children }) => {
         });
         console.log("submitted")
     };
-
-
 
     return (
         <AppContext.Provider
